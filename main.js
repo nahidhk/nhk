@@ -15,17 +15,24 @@ var xn = "~/"+xpio+" $ ";
   The nhk use for a need helps command is 
  1. $ --help 
  
- hoster and ser name change
+ host and server name change
  2. $ cng nam 
  2.1 $ y
- 2.2 $ rld
+ 2.2 $ f5
  
  
  ip show command 
  3. $ ip
+ 3.1 $ y => to copy data
+ 3.2 $ n => to close data
   
  nahid hk website open
  4. $ nhk
+ 
+ open google tools and search box 
+ 6. $ google
+ 
+ 
 
 type y to close help
 
@@ -38,17 +45,58 @@ function erroroff(){
   document.getElementById("errorcmd").style.display="none";
 }
 
+  
 
 
 function you(){
+    var jsonUrl = '';
+
   var hackbox = document.getElementById("server").value;
  
-  if (hackbox == "~/"+xpio+" $ rld") {
+  if (hackbox == "~/"+xpio+" $ f5") {
   window.location.href="/"
   }
-  if (hackbox == "~/"+xpio+" $ ip") {
-  window.location.href="https://ipinfo.io/json"
-  }
+
+if (hackbox == "~/"+xpio+" $ ip") {
+ 
+  fetch("https://ipinfo.io/json")
+    .then(response => response.json())
+    .then(data => {
+      var infoString = ` ${xn} ip is open
+      json ip =>
+      
+      
+     {"ip":"${data.ip}",
+     "City":"${data.city}", 
+     "Region":"${data.region}",
+     "Country":"${data.country}",
+     "Location":${data.loc}",      
+     "Organization":"${data.org}",
+     "Postal Code":"${data.postal},
+     "Timezone":${data.timezone}
+}
+
+1.Type To The Y in copy ip Data 
+
+2. type to the N close ip info 
+
+~/${xpio} $ `;
+ document.getElementById("server").value=infoString;
+ sessionStorage.setItem("ipdata",infoString);
+    })
+    .catch(error =>document.getElementById("server").value=xn+ 'Error fetching data:', error);
+ 
+}
+var ipdatasave = sessionStorage.getItem("ipdata")
+if (hackbox == ipdatasave+"n") {
+ app.value=xn;
+}
+if (hackbox == ipdatasave + "y") {
+  alert("all data copy")
+  navigator.clipboard.writeText(app.value);
+  alert(app.value);
+}
+
   if (hackbox == "~/"+xpio+" $ nhk") {
   window.location.href="https://nahidhk.info"
   }
@@ -77,12 +125,17 @@ window.location.href="/"
   
   }
   
-  if (hackbox === xn+"git" ){
+  if (hackbox === xn+"cmd" ){
  erroron();
 
   }else{
     erroroff();
   }
+   if (hackbox === xn + "help") {
+app.value = xn+"--hel"  
+ alert("please type $ --help")
+   } else {}
+    
 }
 
 
@@ -98,5 +151,5 @@ function saef(){
 
 function google(){
   var docs = document.getElementById("goog").value;
-  window.location.href="https://google.com/?s="+docs;
+  window.location.href="https://google.com/search?q="+docs;
 }

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IP Information</title>
+</head>
+<body>
+
+<textarea id="server"></textarea>
+
+<script>
+  
+
+  // Accessing the div element
+
+  // Fetching JSON data from the URL
+  
+  fetch("https://ipinfo.io/json")
+    .then(response => response.json())
+    .then(data => {
+      var infoString = `
+{"ip":"${data.ip}",
+"City":"${data.city}", 
+"Region":"${data.region}",
+"Country":"${data.country}",
+"Location":${data.loc}",      
+"Organization":"${data.org}",
+"Postal Code":"${data.postal},
+"Timezone":${data.timezone}
+}`;
+ document.getElementById("server").value=infoString;
+    })
+    .catch(error => console.error('Error fetching data:', error));
+</script>
+
+</body>
+</html>

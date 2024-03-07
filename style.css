@@ -5,6 +5,7 @@ body {
     
 }
 .input{
+  text-transform: lowercase;
   padding:20px;
   height: 100vh;
   width: 85%;
