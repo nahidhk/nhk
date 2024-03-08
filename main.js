@@ -135,7 +135,9 @@ window.location.href="/"
 app.value = xn+"--hel"  
  alert("please type $ --help")
    } else {}
-    
+  if (hackbox == xn+ "hack") {
+  alert("this" + xpio + "is local Server it not hacking tools allowed!")  
+  }  
 }
 
 
